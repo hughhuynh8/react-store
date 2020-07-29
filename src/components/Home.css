@@ -1,0 +1,8 @@
+.ui.card>.extra .price, .ui.cards>.card>.extra .price {
+    color: #ff0000;
+    font-size: 1.5em;
+    font-weight: bold;
+}
+.ui.loading {
+    min-height: 400px;
+}

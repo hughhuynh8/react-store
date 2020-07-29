@@ -1,0 +1,8 @@
+{
+  "products": [
+    { "id": 1, "price": 249.00, "title": "3M KN95 Particulate Respirator Mask", "image": "/images/products/mask.jpg", "description": "Maintain a healthy respiratory system with this KN95 respirator, reducing exposure to bacteria, viruses and potentially harmful airborne biological contaminants." },
+    { "id": 2, "price": 4.99, "title": "Dettol Instant Hand Sanitiser", "image": "/images/products/sanitiser.jpg", "description": "The Dettol Instant Hand Sanitiser kills 99.9% of germs instantly, without water anytime, anywhere. Use while in car, office, handbag, picnics, nappy change, travel, sports, etc." },
+    { "id": 3, "price": 85, "title": "Disposable Vinyl Powder Free Gloves", "image": "/images/products/gloves.jpg", "description": "The Ultra Fresh Disposable Vinyl Powder Free Gloves can withstand punctures, stretches and tears at a decent rate. Perfect for health care situations to maintain hygiene." },
+    { "id": 4, "price": 3.50, "title": "Sorbent Clean & Fresh Silky Wipes", "image": "/images/products/wipes.jpg", "description": "Lightly moistened. Kind to sensitive skin. Safe to flush (Based on independent laboratory testing, this product passes the INDA/EDANA Guidelines for Flushability)." }
+  ]
+}
