@@ -3,7 +3,7 @@ import {FETCH_PRODUCT, FETCH_PRODUCTS} from '../actions/types'
 export default (state = [], action) => { 
       switch( action.type ) {
             case FETCH_PRODUCT:
-                // does ID already exist
+                // does Product ID already exist
                 const prodExists = state.find(prod => {
                     if(prod.id === action.payload.id) {
                         return true;

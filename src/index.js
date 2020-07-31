@@ -2,15 +2,29 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './components/App';
 import * as serviceWorker from './serviceWorker';
-
+import throttle from 'lodash/throttle';
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware, compose } from 'redux';
 import thunk from 'redux-thunk';
-
 import reducers from './reducers';
 
+import { loadState, saveState } from './localStorage';
+
+// local storage (persistent cart)
+const persistedState = loadState();
+
+// redux debugging
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
-const store = createStore(reducers, composeEnhancers(applyMiddleware(thunk)));
+// redux store (setting the initial redux state to persistedState, from localStorage)
+const store = createStore(reducers, {...persistedState}, composeEnhancers(applyMiddleware(thunk)));
+
+// save order to local storage
+// throttle ensures that even if lots of changes are made, at most, it saves just once a second 
+store.subscribe(throttle(() => {
+  saveState({
+    order: store.getState().order
+  });
+}, 1000));
 
 ReactDOM.render(
     <Provider store={store}>
