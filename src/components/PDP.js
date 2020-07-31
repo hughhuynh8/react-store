@@ -1,24 +1,28 @@
 import React, { Component }  from 'react';
 import { connect } from 'react-redux'; 
-import { fetchProduct } from '../actions'
+import { Link } from 'react-router-dom';
+import { fetchProduct, addOrder } from '../actions'
+import AddToCartForm from './AddToCartForm';
+
 import './PDP.css';
 
 class PDP extends Component {
-    state = {};
     componentDidMount() {
         this.props.fetchProduct(this.props.match.params.id);
     }
-
-    // For when you click on another product from inside the product page
-    // because it needs to get the new product but the componentDidMount is not called, we need componentDidUpdate
+    // When you click on another product from inside this product page, it doesn't update
+    // because componentDidMount is not called. Hence, we need componentDidUpdate to update the product
     componentDidUpdate(prevProps) {
         if (prevProps.match.params.id !== this.props.match.params.id) {
-            this.setState({
-                id: this.props.match.params.id
-            });
             this.props.fetchProduct(this.props.match.params.id);
         }
     }
+
+    onAddToCartClicked = (formValues) => {
+        console.log("quantity: ", formValues);
+        // this.props.createStream(formValues);
+    }
+
     render() {
         if(!this.props.product) {
             return <div>Loading...</div>;
@@ -26,6 +30,7 @@ class PDP extends Component {
         return (
             <div className="ui container pdp">
                 <h2 className="header">{this.props.product.title}</h2>
+                <Link to='/product/1'>Product 1</Link>
                 <div className="ui two column stackable grid">
                     <div className="column">
                         <div className="ui segment">
@@ -38,18 +43,7 @@ class PDP extends Component {
                         <div className="ui">
                             <div className="content">
                                 <div className="price">${this.props.product.price.toFixed(2)}</div>
-                                <div className="actions">
-                                    <div className="ui left floated quantity menu">
-                                        <button className="icon item" data-content="add">
-                                            <i className="minus icon"></i>
-                                        </button>
-                                        <input type="text" className="item" name="quantity" placeholder="0"/>
-                                        <button className="icon item" data-content="subtract">
-                                            <i className="plus icon"></i>
-                                        </button>
-                                    </div>
-                                    <div className="ui floating primary large button">Add to cart</div>
-                                </div>
+                                <AddToCartForm onSubmitForm={this.onAddToCartClicked}/>
                                 <hr className="divider"/>
                                 <div className="description">
                                     <p>{this.props.product.description}</p>
@@ -64,6 +58,6 @@ class PDP extends Component {
 }
 
 const mapStateToProps = (state, ownProps) => {
-    return { product: state.products.find(prod => prod.id === parseInt(ownProps.match.params.id)) };
+    return { product: state.products.find(prod => prod.id === parseInt(ownProps.match.params.id)), orders: state.orders };
 }
-export default connect(mapStateToProps, { fetchProduct })(PDP);
+export default connect(mapStateToProps, { fetchProduct, addOrder })(PDP);

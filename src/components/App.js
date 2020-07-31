@@ -6,6 +6,7 @@ const Home = lazy(() => import("./Home"));
 const About = lazy(() => import("./About"));
 
 class App extends React.Component {
+    
     render() {
         return (
             <div>

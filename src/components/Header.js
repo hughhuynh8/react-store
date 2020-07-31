@@ -1,6 +1,7 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 import './Header.css'
+import Authentication from './Authentication';
 import MiniCart from './MiniCart';
 
 export default () => {
@@ -15,7 +16,7 @@ export default () => {
                     About
                 </NavLink>
                 <div className="right item">
-                    <div className="ui inverted button">Log in</div>
+                    <Authentication />
                     <MiniCart />
                 </div>
             </div>

@@ -41,9 +41,9 @@ class Home extends React.Component {
         // no products
         if(this.props.products.length === 0) {
             return (
-                <div class="ui loading">
-                    <div class="ui active inverted dimmer">
-                    <div class="ui text loader">Loading</div>
+                <div className="ui loading">
+                    <div className="ui active inverted dimmer">
+                    <div className="ui text loader">Loading</div>
                     </div>
                 </div>
             );
