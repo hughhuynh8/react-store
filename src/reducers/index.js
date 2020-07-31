@@ -8,6 +8,6 @@ import orderReducer from './orderReducer';
 export default combineReducers({
     products: productReducer,
     authentication: authReducer,
-    orders: orderReducer,
+    order: orderReducer,
     form: formReducer
 });

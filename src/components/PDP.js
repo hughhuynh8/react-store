@@ -19,8 +19,8 @@ class PDP extends Component {
     }
 
     onAddToCartClicked = (formValues) => {
-        console.log("quantity: ", formValues);
-        // this.props.createStream(formValues);
+        console.log("qty: ", formValues);
+        this.props.addOrder({...this.props.product, ...formValues});
     }
 
     render() {
@@ -58,6 +58,6 @@ class PDP extends Component {
 }
 
 const mapStateToProps = (state, ownProps) => {
-    return { product: state.products.find(prod => prod.id === parseInt(ownProps.match.params.id)), orders: state.orders };
+    return { product: state.products.find(prod => prod.id === parseInt(ownProps.match.params.id)), order: state.order };
 }
 export default connect(mapStateToProps, { fetchProduct, addOrder })(PDP);

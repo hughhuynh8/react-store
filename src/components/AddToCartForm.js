@@ -22,22 +22,20 @@ class AddToCartForm extends React.Component {
         return null;
     }
 
+    // Number Input with increment and decrement buttons
     renderNumberInput = (fieldProps) => {
         const { input, label, meta } = fieldProps;
-        const className = `field ${meta.error && meta.touched ? 'error': ''}`;
+        const className = `ui left floated quantity menu ${meta.error && meta.touched ? 'error': ''}`;
 
         return (
-            <div className="ui left floated quantity menu">
+            <div className={className}>
                 <button className="icon item" data-content="add" onClick={(e) => this.changeStuff(e)} type="button">
                     <i className="minus icon"></i>
                 </button>
-                <div className={className}>
-                    
-                    <label htmlFor={input.name} className="sr-only">{label}</label>
-                    <input id={input.name} {...input} autoComplete="off" type="number" className="item" />
-                    
-                    {this.renderError(meta)}
-                </div>
+                <label htmlFor={input.name} className="sr-only">{label}</label>
+                <input id={input.name} {...input} autoComplete="off" type="number" className="item" />
+                
+                {this.renderError(meta)}
                 <button className="icon item" data-content="subtract" type="button">
                     <i className="plus icon"></i>
                 </button>
@@ -67,7 +65,7 @@ class AddToCartForm extends React.Component {
                         normalize={quantityRestrictions}
                     />
                         
-                    <button type="submit" className="ui floating primary large button">Add to cart</button>
+                    <button type="submit" className="ui floating primary big button">Add to cart</button>
                 </div>
             </form>
         );
@@ -81,7 +79,7 @@ const quantityRestrictions = value => {
     } else if(value > QUANTITY_SETTINGS.quantityMax) {
       return QUANTITY_SETTINGS.quantityMax
     } else {
-      return value
+      return parseInt(value)
     }
 }
 

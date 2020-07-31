@@ -2,8 +2,8 @@
     margin-bottom: 20px;
 }
 .pdp .quantity.menu > .item {
-    padding-top: 0.84em;
-    padding-bottom: 0.84em;
+    padding-top: 0.95em;
+    padding-bottom: 0.95em;
 }
 .pdp .quantity.menu button.icon {
     border: none;
@@ -17,6 +17,18 @@
     border-left: 1px solid rgba(34,36,38,.1);
     border-right: 1px solid rgba(34,36,38,.1);
 }
+/* hide up and down arrows on input field */
+/* Chrome, Safari, Edge, Opera */
+.pdp .quantity.menu input.item::-webkit-outer-spin-button,
+.pdp .quantity.menu input.item::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+/* Firefox */
+.pdp .quantity.menu input.item[type=number] {
+  -moz-appearance: textfield;
+}
+
 .pdp .quantity.ui.menu .item:before {
     position: absolute;
     content: '';
