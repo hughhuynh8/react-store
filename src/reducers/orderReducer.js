@@ -41,6 +41,7 @@ export default (state = {products: [], total: 0}, action) => {
                 else {
                     // sub-cost of the product we're removing
                     subtractionalCost = order.price * order.quantity;
+                    return null;
                 }
             });
             return {...state, products: newStateProducts, total: (state.total - subtractionalCost)};

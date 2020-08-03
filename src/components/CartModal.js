@@ -1,10 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { connect } from 'react-redux'; 
 
 class CartModal extends React.Component {
     render() {
         let classes = '';
-        if(this.props.active) {
+        if(this.props.cart.isCartOpen) {
             classes = "visible active";
         }
         return ReactDOM.createPortal(
@@ -21,4 +22,7 @@ class CartModal extends React.Component {
  
 }
 
-export default CartModal;
+const mapStateToProps = (state) => {
+    return { cart: state.cart };
+}
+export default connect(mapStateToProps)(CartModal);

@@ -1,7 +1,7 @@
 import React, { Component }  from 'react';
 import { connect } from 'react-redux'; 
 import { Link } from 'react-router-dom';
-import { fetchProduct, addOrder } from '../actions'
+import { fetchProduct, addOrder, openCart } from '../actions'
 import AddToCartForm from './AddToCartForm';
 
 import './PDP.css';
@@ -11,7 +11,7 @@ class PDP extends Component {
         this.props.fetchProduct(this.props.match.params.id);
     }
     // When you click on another product from inside this product page, it doesn't update
-    // because componentDidMount is not called. Hence, we need componentDidUpdate to update the product
+    // because componentDidMount is not called. Hence, we need to update the product when componentDidUpdate
     componentDidUpdate(prevProps) {
         if (prevProps.match.params.id !== this.props.match.params.id) {
             this.props.fetchProduct(this.props.match.params.id);
@@ -19,8 +19,8 @@ class PDP extends Component {
     }
 
     onAddToCartClicked = (formValues) => {
-        console.log("qty: ", formValues);
         this.props.addOrder({...this.props.product, ...formValues});
+        this.props.openCart();
     }
 
     render() {
@@ -60,4 +60,4 @@ class PDP extends Component {
 const mapStateToProps = (state, ownProps) => {
     return { product: state.products.find(prod => prod.id === parseInt(ownProps.match.params.id)), order: state.order };
 }
-export default connect(mapStateToProps, { fetchProduct, addOrder })(PDP);
+export default connect(mapStateToProps, { fetchProduct, addOrder, openCart })(PDP);

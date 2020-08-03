@@ -6,10 +6,8 @@ import { deleteOrder, sendOrders, openCart, closeCart } from '../actions';
 import './MiniCart.css';
 
 class MiniCart extends React.Component {
-    state = { showModal: false, total: 0 };
 
     toggleModal = () => {
-        this.setState({ showModal: !this.state.showModal });
         if(this.props.cart.isCartOpen) {
             this.props.closeCart();
         }
@@ -23,7 +21,6 @@ class MiniCart extends React.Component {
     }
 
     cancel = () => {
-        this.setState({ showModal: false });
         this.props.closeCart();
     }
 
@@ -87,21 +84,20 @@ class MiniCart extends React.Component {
     renderActions() {
         return (
             <>
+                <div className="ui button cancel" onClick={this.cancel}>
+                    Continue Shopping
+                </div>
                 <div className="ui button primary" onClick={this.checkout}>
                     Checkout
-                </div>
-                <div className="ui button cancel" onClick={this.cancel}>
-                    Cancel
                 </div>
             </>
         );
     }
     render() {
-        console.log('open cart: ', this.props.cart)
         return (
             <>
                 <button className="ui inverted button icon" onClick={this.toggleModal}><i className="shopping cart icon"></i></button>
-                <CartModal title="Shoppping Cart" content={this.renderEntireCart()} actions={this.renderActions()} onDismiss={this.cancel} active={this.state.showModal}/>
+                <CartModal title="Shoppping Cart" content={this.renderEntireCart()} actions={this.renderActions()} onDismiss={this.cancel} />
             </>
         );
     }
