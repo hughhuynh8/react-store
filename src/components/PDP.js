@@ -29,13 +29,13 @@ class PDP extends Component {
         }
         return (
             <div className="ui container pdp">
-                <h2 className="header">{this.props.product.title}</h2>
+                <h2 className="header">{this.props.product.name}</h2>
                 <Link to='/product/1'>Product 1</Link>
                 <div className="ui two column stackable grid">
                     <div className="column">
                         <div className="ui segment">
                             <div className="ui fluid image">
-                                <img src={this.props.product.image} alt={this.props.product.title}/>
+                                <img src={this.props.product.image} alt={this.props.product.name}/>
                             </div>
                         </div>
                     </div>

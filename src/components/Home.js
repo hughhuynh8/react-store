@@ -16,10 +16,10 @@ class Home extends React.Component {
                 <Link to={`/product/${product.id}`} className="ten wide mobile seven wide tablet four wide computer column" key={product.id}>
                     <div className="ui card">
                         <div className="image">
-                            <img src={product.image} alt={product.title}/>
+                            <img src={product.image} alt={product.name}/>
                         </div>
                         <div className="content">
-                            <h4 className="header">{product.title}</h4>
+                            <h4 className="header">{product.name}</h4>
                             <div className="description">{product.description}</div>
                         </div>
                         <div className="extra content">

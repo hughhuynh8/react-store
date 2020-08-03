@@ -1,12 +1,21 @@
 import React from 'react';
 import CartModal from './CartModal';
+import { connect } from 'react-redux'; 
+import { deleteOrder, sendOrders, openCart, closeCart } from '../actions';
+
+import './MiniCart.css';
 
 class MiniCart extends React.Component {
-    state = { showModal: false };
+    state = { showModal: false, total: 0 };
 
     toggleModal = () => {
         this.setState({ showModal: !this.state.showModal });
-        console.log(this.state.showModal);
+        if(this.props.cart.isCartOpen) {
+            this.props.closeCart();
+        }
+        else {
+            this.props.openCart();
+        }
     }
 
     checkout() {
@@ -15,12 +24,70 @@ class MiniCart extends React.Component {
 
     cancel = () => {
         this.setState({ showModal: false });
+        this.props.closeCart();
     }
 
+    renderCartProduct() {
+        return this.props.order.products.map((prod)=>{
+            return (
+                <tr key={prod.id}>
+                    <td>
+                        <img src={prod.image} className="ui small image" alt={prod.name} />
+                    </td>
+                    <td>
+                        {prod.name}
+                    </td>
+                    <td>
+                        {prod.quantity}
+                    </td>
+                    <td className="right aligned price">
+                        ${prod.price.toFixed(2)}
+                    </td>
+                    <td className="action">
+                        <button type="button" className="ui button red" onClick={() => this.props.deleteOrder(prod.id)}>Delete</button>
+                    </td>
+                </tr>
+            );
+        });
+    }
+
+    renderEntireCart() {
+        return (
+            <div>
+                <table className="ui table cart">
+                    <thead>
+                        <tr>
+                            <th>Image</th>
+                            <th>Name</th>
+                            <th>Quantity</th>
+                            <th className="right aligned">Price</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {this.renderCartProduct()}
+                    </tbody>
+                    <tfoot>
+                        <tr className="total">
+                            <th colSpan="3">
+                                TOTAL
+                            </th>
+                            <th className="right aligned price" >
+                                ${this.props.order.total.toFixed(2)}
+                            </th>
+                            <th>
+                                <button type="button" className="ui button red">Delete All</button>
+                            </th>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
+        );
+    }
     renderActions() {
         return (
             <>
-                <div className="ui button red" onClick={this.checkout}>
+                <div className="ui button primary" onClick={this.checkout}>
                     Checkout
                 </div>
                 <div className="ui button cancel" onClick={this.cancel}>
@@ -30,13 +97,16 @@ class MiniCart extends React.Component {
         );
     }
     render() {
+        console.log('open cart: ', this.props.cart)
         return (
             <>
                 <button className="ui inverted button icon" onClick={this.toggleModal}><i className="shopping cart icon"></i></button>
-                <CartModal title="Shoppping Cart" content={`Show me the money`} actions={this.renderActions()} onDismiss={this.cancel} active={this.state.showModal}/>
+                <CartModal title="Shoppping Cart" content={this.renderEntireCart()} actions={this.renderActions()} onDismiss={this.cancel} active={this.state.showModal}/>
             </>
         );
     }
 }
-
-export default MiniCart;
+const mapStateToProps = (state) => {
+    return { order: state.order, cart: state.cart };
+}
+export default connect(mapStateToProps, { deleteOrder, sendOrders, openCart, closeCart })(MiniCart);

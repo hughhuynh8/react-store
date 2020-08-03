@@ -1,5 +1,5 @@
 import jsonPlaceholder from '../apis/products';
-import {FETCH_PRODUCT, FETCH_PRODUCTS, SIGN_IN, SIGN_OUT, ADD_ORDER, DELETE_ORDER, SEND_ORDERS } from './types';
+import {FETCH_PRODUCT, FETCH_PRODUCTS, SIGN_IN, SIGN_OUT, ADD_ORDER, DELETE_ORDER, SEND_ORDERS, OPEN_CART, CLOSE_CART } from './types';
 
 // AUTHENTICATION
 export const signIn = (userId) => { 
@@ -57,11 +57,27 @@ export const deleteOrder = (orderId) => {
 export const sendOrders = (orders) => { 
     return async (dispatch, getState) => {
         const { userId } = getState().auth; // get UserId from Auth reducer so when we create a new stream, we can insert the User for that stream
+        
+        // TODO: write code to send orders to Firebase
         const response = await jsonPlaceholder.post('/orders');
         
         dispatch({
             type: SEND_ORDERS,
             payload: {...response.data, userId: userId }
         });
+    }
+};
+
+// CART
+export const openCart = () => { 
+    return {
+        type: OPEN_CART,
+        payload: {isCartOpen: true}
+    }
+};
+export const closeCart = () => { 
+    return {
+        type: CLOSE_CART,
+        payload: {isCartOpen: false}
     }
 };

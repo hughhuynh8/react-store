@@ -1,0 +1,6 @@
+.ui.table.cart .action {
+    width: 130px;
+}
+.ui.table.cart tfoot .total th {
+    font-weight: bold;
+}

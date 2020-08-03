@@ -10,7 +10,7 @@ import reducers from './reducers';
 
 import { loadState, saveState } from './localStorage';
 
-// local storage (persistent cart)
+// load cart from local storage (if it exists in localStorage)
 const persistedState = loadState();
 
 // redux debugging
