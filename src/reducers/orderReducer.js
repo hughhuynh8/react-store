@@ -1,4 +1,4 @@
-import {ADD_ORDER, DELETE_ORDER, SEND_ORDERS} from '../actions/types';
+import {ADD_ORDER, DELETE_ORDER, CLEAR_ORDERS, SEND_ORDERS} from '../actions/types';
 
 export default (state = {products: [], total: 0}, action) => {
     switch(action.type) {
@@ -45,8 +45,12 @@ export default (state = {products: [], total: 0}, action) => {
                 }
             });
             return {...state, products: newStateProducts, total: (state.total - subtractionalCost)};
+        case CLEAR_ORDERS:
+                return {...state, products: [], total: 0};
         case SEND_ORDERS:
-            return {...state, products: [], total: 0};
+            console.log("Firebase response for set: ", action.payload);
+            return {...state};
+            // return {...state, products: [], total: 0};
         default:
             return state;
     }

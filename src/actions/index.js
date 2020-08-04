@@ -1,18 +1,19 @@
 import jsonPlaceholder from '../apis/products';
-import {FETCH_PRODUCT, FETCH_PRODUCTS, SIGN_IN, SIGN_OUT, ADD_ORDER, DELETE_ORDER, SEND_ORDERS, OPEN_CART, CLOSE_CART } from './types';
+import {FETCH_PRODUCT, FETCH_PRODUCTS, SIGN_IN, SIGN_OUT, ADD_ORDER, DELETE_ORDER, SEND_ORDERS, OPEN_CART, CLOSE_CART, CLEAR_ORDERS } from './types';
+const database = window.firebase.database();
 
 // AUTHENTICATION
-export const signIn = (userId) => { 
+export const signIn = ({userName, email}) => { 
     return {
         type: SIGN_IN,
-        payload: {isSignedIn: true, user: userId}
+        payload: {isSignedIn: true, userName, email}
     }
 }
 
 export const signOut = () => { 
     return {
         type: SIGN_OUT,
-        payload: {isSignedIn: false, user: ''}
+        payload: {isSignedIn: false, userName: '', email: ''}
     }
 }
 
@@ -54,16 +55,27 @@ export const deleteOrder = (orderId) => {
     }
 };
 
+export const clearOrders = () => { 
+    return {
+        type: CLEAR_ORDERS,
+        payload: null
+    }
+};
+
 export const sendOrders = (orders) => { 
     return async (dispatch, getState) => {
-        const { userId } = getState().auth; // get UserId from Auth reducer so when we create a new stream, we can insert the User for that stream
+        const { userName, email } = getState().authentication; // get user details from Authentication reducer so when we create a new order, 
+                                                               // we can insert the userName and email for that order
         
-        // TODO: write code to send orders to Firebase
-        const response = await jsonPlaceholder.post('/orders');
+        var newOrderRef = database.ref("orders").push();
+        var newOrder = {...orders, userName, email};
+        console.log('sending order: ', newOrder);
+
+        const response = await newOrderRef.set(newOrder);
         
         dispatch({
             type: SEND_ORDERS,
-            payload: {...response.data, userId: userId }
+            payload: response
         });
     }
 };

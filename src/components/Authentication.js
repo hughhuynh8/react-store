@@ -6,15 +6,13 @@ const auth = window.firebase.auth();
 const provider = new window.firebase.auth.GoogleAuthProvider();
 
 class Authentication extends Component {
-    state = {userName: null};
 
     componentDidMount() {
         auth.onAuthStateChanged(
             user => {
                 if(user) {
-                    console.log('user logged in: ', user);
-                    this.setState({userName: user.displayName});
-                    this.props.signIn(user.uid);
+                    console.log('signing in: ', {userName: user.displayName, email: user.email});
+                    this.props.signIn({userName: user.displayName, email: user.email});
                 }
                 else {
                     console.log('user logged out');
@@ -47,7 +45,7 @@ class Authentication extends Component {
         if(this.props.authentication.isSignedIn){
             return (
                 <>
-                    <span>Logged in: {this.state.userName}</span>
+                    <span>Logged in: {this.props.authentication.userName}</span>
                     <button className="ui inverted button" onClick={this.logout}>Sign Out</button>
                 </>
             )

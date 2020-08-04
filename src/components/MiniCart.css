@@ -4,3 +4,6 @@
 .ui.table.cart tfoot .total th {
     font-weight: bold;
 }
+.ui.table.cart .action .btn {
+    cursor: pointer;
+}
