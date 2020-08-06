@@ -31,7 +31,7 @@ export default () => {
                                 <img className="ui icon image" src="/images/icons/firebase.png" alt="Firebase logo"/>
                                 Firebase Cloud Database
                             </h2>
-                            <p>Real time database that stores and syncs the app data at global scale.</p>
+                            <p>Real time database that stores and syncs the app data.</p>
                             <a className="ui large button" href="https://firebase.google.com/">https://firebase.google.com/</a>
                         </div>
                     </div>

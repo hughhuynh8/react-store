@@ -4,6 +4,7 @@ import Header from './Header';
 import PDP from './PDP';
 const Home = lazy(() => import("./Home"));
 const About = lazy(() => import("./About"));
+const Orders = lazy(() => import("./Orders"));
 
 class App extends React.Component {
     
@@ -17,6 +18,7 @@ class App extends React.Component {
                             <Switch>
                                 <Route path="/" exact component={Home} />
                                 <Route path="/about" component={About} />
+                                <Route path="/orders" component={Orders} />
                                 <Route path="/product/:id" exact component={PDP} />
                             </Switch>
                         </div>

@@ -1,4 +1,4 @@
-import {ADD_ORDER, DELETE_ORDER, CLEAR_ORDERS, SEND_ORDERS} from '../actions/types';
+import { ADD_ORDER, DELETE_ORDER, CLEAR_ORDERS, SEND_ORDERS, SEND_ORDERS_ERROR } from '../actions/types';
 
 export default (state = {products: [], total: 0}, action) => {
     switch(action.type) {
@@ -49,8 +49,10 @@ export default (state = {products: [], total: 0}, action) => {
                 return {...state, products: [], total: 0};
         case SEND_ORDERS:
             console.log("Firebase response for set: ", action.payload);
+            return {...state, products: [], total: 0};
+        case SEND_ORDERS_ERROR:
+            console.log("Firebase error: ", action.payload);
             return {...state};
-            // return {...state, products: [], total: 0};
         default:
             return state;
     }

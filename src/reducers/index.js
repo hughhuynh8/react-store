@@ -4,6 +4,8 @@ import productReducer from './productReducer';
 import authReducer from './authReducer';
 import orderReducer from './orderReducer';
 import cartReducer from './cartReducer';
+import { firebaseReducer } from 'react-redux-firebase';
+import { firestoreReducer } from 'redux-firestore';
 
 // export ourDepartments
 export default combineReducers({
@@ -11,5 +13,7 @@ export default combineReducers({
     authentication: authReducer,
     order: orderReducer,
     form: formReducer,
-    cart: cartReducer
+    cart: cartReducer,
+    firebase: firebaseReducer,
+    firestore: firestoreReducer
 });

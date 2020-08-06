@@ -2,43 +2,18 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { signIn, signOut } from '../actions';
 
-const auth = window.firebase.auth();
-const provider = new window.firebase.auth.GoogleAuthProvider();
-
 class Authentication extends Component {
 
     componentDidMount() {
-        auth.onAuthStateChanged(
-            user => {
-                if(user) {
-                    console.log('signing in: ', {userName: user.displayName, email: user.email});
-                    this.props.signIn({userName: user.displayName, email: user.email});
-                }
-                else {
-                    console.log('user logged out');
-                    this.props.signOut();
-                }
-            }, 
-            error => {
-                console.log(error);
-            }
-        );
+        this.props.signIn({userName: "Harry Styles", email: "harry@yahoo.com"});
     }
 
     login(){
-        // This will open a Google Popup with sign in details
-        auth.signInWithPopup(provider);
+        console.log('login');
     }
 
     logout() {
-        auth.signOut()
-            .then(() => {
-                // Signout successful
-            })
-            .catch((error) => {
-                // error occurred
-                console.log(error);
-            });
+        console.log('logout');
     }
 
     render() {

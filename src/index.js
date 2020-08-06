@@ -7,8 +7,12 @@ import { Provider } from 'react-redux';
 import { createStore, applyMiddleware, compose } from 'redux';
 import thunk from 'redux-thunk';
 import reducers from './reducers';
+import { createFirestoreInstance } from 'redux-firestore';
+import { getFirebase, ReactReduxFirebaseProvider } from 'react-redux-firebase';
+import firebase from './config/firebaseConfig';
 
-import { loadState, saveState } from './localStorage';
+
+import { loadState, saveState } from './localStorage';  // to save our cart into localStorage 
 
 // load cart from local storage (if it exists in localStorage)
 const persistedState = loadState();
@@ -16,7 +20,11 @@ const persistedState = loadState();
 // redux debugging
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 // redux store (setting the initial redux state to persistedState, from localStorage)
-const store = createStore(reducers, {...persistedState}, composeEnhancers(applyMiddleware(thunk)));
+const store = createStore(
+  reducers,
+  {...persistedState},
+  composeEnhancers(applyMiddleware(thunk.withExtraArgument({ getFirebase })))
+);
 
 // save order to local storage
 // throttle ensures that even if lots of changes are made, at most, it saves just once a second 
@@ -26,9 +34,19 @@ store.subscribe(throttle(() => {
   });
 }, 1000));
 
+// Firebase
+const rrfProps = {
+  firebase,
+  config: {},
+  dispatch: store.dispatch,
+  createFirestoreInstance
+}
+
 ReactDOM.render(
     <Provider store={store}>
-      <App />
+      <ReactReduxFirebaseProvider {...rrfProps}>
+        <App />
+      </ReactReduxFirebaseProvider>
     </Provider>,
   document.getElementById('root')
 );

@@ -1,6 +1,5 @@
 import jsonPlaceholder from '../apis/products';
-import {FETCH_PRODUCT, FETCH_PRODUCTS, SIGN_IN, SIGN_OUT, ADD_ORDER, DELETE_ORDER, SEND_ORDERS, OPEN_CART, CLOSE_CART, CLEAR_ORDERS } from './types';
-const database = window.firebase.database();
+import {FETCH_PRODUCT, FETCH_PRODUCTS, SIGN_IN, SIGN_OUT, ADD_ORDER, DELETE_ORDER, SEND_ORDERS, SEND_ORDERS_ERROR, OPEN_CART, CLOSE_CART, CLEAR_ORDERS } from './types';
 
 // AUTHENTICATION
 export const signIn = ({userName, email}) => { 
@@ -63,20 +62,28 @@ export const clearOrders = () => {
 };
 
 export const sendOrders = (orders) => { 
-    return async (dispatch, getState) => {
+    return async (dispatch, getState, { getFirebase }) => {
         const { userName, email } = getState().authentication; // get user details from Authentication reducer so when we create a new order, 
                                                                // we can insert the userName and email for that order
-        
-        var newOrderRef = database.ref("orders").push();
+        const firestore = getFirebase().firestore();
+
         var newOrder = {...orders, userName, email};
         console.log('sending order: ', newOrder);
 
-        const response = await newOrderRef.set(newOrder);
-        
-        dispatch({
-            type: SEND_ORDERS,
-            payload: response
-        });
+        firestore.collection("orders").add(newOrder)
+            .then(() => {
+                dispatch({
+                    type: SEND_ORDERS,
+                    payload: newOrder
+                });
+            })
+            .catch(err => {
+                dispatch({
+                    type: SEND_ORDERS_ERROR,
+                    payload: err
+                });
+            });
+        // TODO: send to firebase
     }
 };
 

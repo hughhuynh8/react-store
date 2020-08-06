@@ -15,6 +15,9 @@ export default () => {
                 <NavLink activeClassName="active" to="/about" className="item">
                     About
                 </NavLink>
+                <NavLink activeClassName="active" to="/orders" className="item">
+                    Orders
+                </NavLink>
                 <div className="right item">
                     <Authentication />
                     <MiniCart />

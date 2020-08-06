@@ -6,5 +6,6 @@ export const ADD_ORDER = 'ADD_ORDER';
 export const DELETE_ORDER = 'DELETE_ORDER';
 export const CLEAR_ORDERS = 'CLEAR_ORDERS';
 export const SEND_ORDERS = 'SEND_ORDERS';
+export const SEND_ORDERS_ERROR = 'SEND_ORDERS_ERROR';
 export const OPEN_CART = 'OPEN_CART';
 export const CLOSE_CART = 'CLOSE_CART';
