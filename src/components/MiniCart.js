@@ -1,5 +1,6 @@
 import React from 'react';
 import CartModal from './CartModal';
+import MiniCartItem from './MiniCartItem';
 import { connect } from 'react-redux'; 
 import { deleteOrder, clearOrders, sendOrders } from '../actions/orderActions';
 import { openCart, closeCart } from '../actions/cartActions';
@@ -25,30 +26,6 @@ class MiniCart extends React.Component {
         this.props.closeCart();
     }
 
-    renderItem() {
-        return this.props.order.products.map((prod)=>{
-            return (
-                <tr key={prod.id}>
-                    <td>
-                        <img src={prod.image} className="ui small image" alt={prod.name} />
-                    </td>
-                    <td>
-                        {prod.name}
-                    </td>
-                    <td>
-                        {prod.quantity}
-                    </td>
-                    <td className="right aligned price">
-                        ${prod.price.toFixed(2)}
-                    </td>
-                    <td className="action right aligned">
-                        <i className="times circle icon large ui red btn" onClick={() => this.props.deleteOrder(prod.id)}></i>
-                    </td>
-                </tr>
-            );
-        });
-    }
-
     renderCart() {
         if(this.props.order.products.length === 0){
             return <div>Cart is empty</div>
@@ -66,7 +43,7 @@ class MiniCart extends React.Component {
                         </tr>
                     </thead>
                     <tbody>
-                        {this.renderItem()}
+                        {this.props.order.products.map( prod => <MiniCartItem prod={prod} deleteAction={() => this.props.deleteOrder(prod.id)} key={prod.id}/> )}
                     </tbody>
                     <tfoot>
                         <tr className="total">

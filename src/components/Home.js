@@ -2,6 +2,8 @@ import React from 'react';
 import { connect } from 'react-redux'; 
 import { fetchProducts } from '../actions/productActions'
 import { Link } from 'react-router-dom';
+import Loading from './Loading';
+
 import './Home.css';
 
 class Home extends React.Component {
@@ -40,13 +42,7 @@ class Home extends React.Component {
         }
         // no products
         if(this.props.products.length === 0) {
-            return (
-                <div className="ui loading">
-                    <div className="ui active inverted dimmer">
-                    <div className="ui text loader">Loading</div>
-                    </div>
-                </div>
-            );
+            return <Loading />;
         }
 
         return (
