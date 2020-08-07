@@ -6,12 +6,12 @@ import { firestoreConnect } from 'react-redux-firebase';
 import Loading from './Loading';
 
 const Orders = ({orders}) => {
-  if(orders == undefined){
+  if(orders === undefined){
     return <Loading />;;
   }
   return (
-    <div class="ui grid">
-      <div class="ten wide column">
+    <div className="ui grid">
+      <div className="ten wide column">
         <table className="ui table cart">
           <thead>
               <tr>
@@ -32,7 +32,6 @@ const Orders = ({orders}) => {
 }
 
 const mapStateToProps = (state) => {
-    console.log(state);
     return {
       orders: state.firestore.ordered.orders
     };

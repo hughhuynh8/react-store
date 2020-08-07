@@ -1,5 +1,6 @@
 import React from 'react';
 import moment from 'moment';
+import OrderDetails from './OrderDetails';
 
 const OrderItem = ({order}) => {
     return(
@@ -18,7 +19,7 @@ const OrderItem = ({order}) => {
                 Pending
             </td>
             <td className="action">
-                <a href="#">View Order</a>
+                <OrderDetails order={order} />
             </td>
         </tr>
     )
