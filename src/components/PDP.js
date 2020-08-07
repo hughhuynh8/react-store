@@ -1,7 +1,9 @@
 import React, { Component }  from 'react';
 import { connect } from 'react-redux'; 
 import { Link } from 'react-router-dom';
-import { fetchProduct, addOrder, openCart } from '../actions'
+import { fetchProduct } from '../actions/productActions'
+import { addOrder } from '../actions/orderActions'
+import { openCart } from '../actions/cartActions'
 import AddToCartForm from './AddToCartForm';
 
 import './PDP.css';

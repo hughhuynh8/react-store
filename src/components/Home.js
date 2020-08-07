@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux'; 
-import { fetchProducts } from '../actions'
+import { fetchProducts } from '../actions/productActions'
 import { Link } from 'react-router-dom';
 import './Home.css';
 

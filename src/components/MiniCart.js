@@ -1,7 +1,8 @@
 import React from 'react';
 import CartModal from './CartModal';
 import { connect } from 'react-redux'; 
-import { deleteOrder, clearOrders, sendOrders, openCart, closeCart } from '../actions';
+import { deleteOrder, clearOrders, sendOrders } from '../actions/orderActions';
+import { openCart, closeCart } from '../actions/cartActions';
 
 import './MiniCart.css';
 
