@@ -3,14 +3,14 @@ import CartModal from './CartModal';
 import MiniCartItem from './MiniCartItem';
 import { connect } from 'react-redux'; 
 import { deleteOrder, clearOrders, sendOrders } from '../actions/orderActions';
-import { openCart, closeCart } from '../actions/cartActions';
+import { openCart, closeCart } from '../actions/cartModalActions';
 
 import './MiniCart.css';
 
 class MiniCart extends React.Component {
 
     toggleModal = () => {
-        if(this.props.cart.isCartOpen) {
+        if(this.props.cartModal.isCartOpen) {
             this.props.closeCart();
         }
         else {
@@ -88,6 +88,6 @@ class MiniCart extends React.Component {
     }
 }
 const mapStateToProps = (state) => {
-    return { order: state.order, cart: state.cart };
+    return { order: state.order, cartModal: state.cartModal };
 }
 export default connect(mapStateToProps, { deleteOrder, clearOrders, sendOrders, openCart, closeCart })(MiniCart);

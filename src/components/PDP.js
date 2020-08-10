@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { fetchProduct } from '../actions/productActions'
 import { addOrder } from '../actions/orderActions'
-import { openCart } from '../actions/cartActions'
+import { openCart } from '../actions/cartModalActions'
 import AddToCartForm from './AddToCartForm';
 
 import './PDP.css';

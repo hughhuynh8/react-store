@@ -35,7 +35,7 @@ export const sendOrders = (orders) => {
             .then(() => {
                 dispatch({
                     type: SEND_ORDERS,
-                    payload: newOrder
+                    payload: {message: "Your order has been sent.", response: true}
                 });
             })
             .catch(err => {
