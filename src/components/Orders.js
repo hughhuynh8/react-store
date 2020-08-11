@@ -32,17 +32,18 @@ const Orders = ({orders}) => {
 }
 
 const mapStateToProps = (state) => {
-    return {
-      orders: state.firestore.ordered.orders
-    };
+  return {
+    orders: state.firestore.ordered.orders,
+    auth: state.authentication
   };
-  export default compose(
-    connect(mapStateToProps),
-    firestoreConnect((ownProps) => [
-      {
-        collection: "orders",
-        where: ["email", "==", "harry@yahoo.com"],
-        orderBy: ["date", "desc"],
-      },
-    ])
-  )(Orders);
+};
+export default compose(
+  connect(mapStateToProps),
+  firestoreConnect((ownProps) => [
+    {
+      collection: "orders",
+      where: ["email", "==", ownProps.auth.email],
+      orderBy: ["date", "desc"],
+    },
+  ])
+)(Orders);
