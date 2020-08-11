@@ -33,15 +33,17 @@ export const sendOrders = (orders) => {
         // send to Firebase
         firestore.collection("orders").add(newOrder)
             .then(() => {
+                console.log("Firebase order sent successfully");
                 dispatch({
                     type: SEND_ORDERS,
-                    payload: {message: "Your order has been sent.", response: true}
+                    payload: {message: "Your order has been sent.", hasResponse: true, isSuccess: true}
                 });
             })
             .catch(err => {
+                console.log("Firebase order send error:", err);
                 dispatch({
                     type: SEND_ORDERS_ERROR,
-                    payload: {...err, response: true}
+                    payload: {...err, hasResponse: true, isSuccess: false}
                 });
             });
     }

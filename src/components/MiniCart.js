@@ -24,10 +24,19 @@ class MiniCart extends React.Component {
 
     cancel = () => {
         this.props.closeCart();
+        // After showing Successful checkout, we need to clear the order and message so that next time cart is opened, we can show the products
+        if(this.props.order.hasResponse && this.props.order.isSuccess) {
+            this.props.clearOrders();
+        }
     }
 
     renderCart() {
-        if(this.props.order.products.length === 0){
+        // Handle success and error messages
+        if(this.props.order.hasResponse){
+            return <div>{this.props.order.message}</div>
+        }
+        // Handle empty cart
+        else if(this.props.order.products.length === 0){
             return <div>Cart is empty</div>
         }
         return (

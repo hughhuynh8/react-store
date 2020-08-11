@@ -1,6 +1,6 @@
 import { ADD_ORDER, DELETE_ORDER, CLEAR_ORDERS, SEND_ORDERS, SEND_ORDERS_ERROR } from '../actions/types';
 
-export default (state = {products: [], total: 0}, action) => {
+export default (state = {products: [], total: 0, hasResponse: false, message: ''}, action) => {
     switch(action.type) {
         case ADD_ORDER:
             // does Product ID already exist?
@@ -26,11 +26,11 @@ export default (state = {products: [], total: 0}, action) => {
                         return prod;
                 });
 
-                return {...state, products: newStateProducts, total: (state.total + additionalCost)};
+                return {...state, products: newStateProducts, total: (state.total + additionalCost), hasResponse: false, message: ''};
             }
             // product doesn't exists -> add it
             else {
-                return {...state, products: [...state.products, action.payload], total: (state.total + action.payload.price * action.payload.quantity)};
+                return {...state, products: [...state.products, action.payload], total: (state.total + action.payload.price * action.payload.quantity), hasResponse: false, message: ''};
             }
         case DELETE_ORDER:
             let subtractionalCost = 0;
@@ -44,15 +44,13 @@ export default (state = {products: [], total: 0}, action) => {
                     return null;
                 }
             });
-            return {...state, products: newStateProducts, total: (state.total - subtractionalCost)};
+            return {...state, products: newStateProducts, total: (state.total - subtractionalCost), hasResponse: false, message: ''};
         case CLEAR_ORDERS:
-                return {...state, products: [], total: 0};
+                return {...state, products: [], total: 0, hasResponse: false, message: ''};
         case SEND_ORDERS:
-            console.log("Firebase response for set: ", action.payload);
-            return {...state, products: [], total: 0};
+            return {...action.payload, products: [], total: 0};
         case SEND_ORDERS_ERROR:
-            console.log("Firebase error: ", action.payload);
-            return {...state};
+            return {...state, ...action.payload};
         default:
             return state;
     }
