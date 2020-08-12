@@ -2,7 +2,7 @@ import React from 'react';
 import CartModal from './CartModal';
 import MiniCartItem from './MiniCartItem';
 import { connect } from 'react-redux'; 
-import { deleteOrder, clearOrders, sendOrders } from '../actions/orderActions';
+import { deleteOrder, clearOrders, clearMessage, sendOrders } from '../actions/orderActions';
 import { openCart, closeCart } from '../actions/cartModalActions';
 
 import './MiniCart.css';
@@ -28,12 +28,32 @@ class MiniCart extends React.Component {
         if(this.props.order.hasResponse && this.props.order.isSuccess) {
             this.props.clearOrders();
         }
+        else if(this.props.order.hasResponse && !this.props.order.isSuccess) {
+            this.props.clearMessage();
+        }
     }
 
     renderCart() {
         // Handle success and error messages
         if(this.props.order.hasResponse){
-            return <div>{this.props.order.message}</div>
+            if(this.props.order.isSuccess){
+                return (
+                    <div className="ui positive message">
+                        <div className="header">
+                        {this.props.order.message}
+                        </div>
+                    </div>
+                )
+            }
+            else {
+                return (
+                    <div className="ui negative message">
+                        <div className="header">
+                            {this.props.order.message}
+                        </div>
+                    </div>
+                )
+            }
         }
         // Handle empty cart
         else if(this.props.order.products.length === 0){
@@ -99,4 +119,4 @@ class MiniCart extends React.Component {
 const mapStateToProps = (state) => {
     return { order: state.order, cartModal: state.cartModal };
 }
-export default connect(mapStateToProps, { deleteOrder, clearOrders, sendOrders, openCart, closeCart })(MiniCart);
+export default connect(mapStateToProps, { deleteOrder, clearOrders, clearMessage, sendOrders, openCart, closeCart })(MiniCart);

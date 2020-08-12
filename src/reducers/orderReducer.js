@@ -1,4 +1,4 @@
-import { ADD_ORDER, DELETE_ORDER, CLEAR_ORDERS, SEND_ORDERS, SEND_ORDERS_ERROR } from '../actions/types';
+import { ADD_ORDER, DELETE_ORDER, CLEAR_ORDERS, CLEAR_MESSAGE, SEND_ORDERS, SEND_ORDERS_ERROR } from '../actions/types';
 
 export default (state = {products: [], total: 0, hasResponse: false, message: ''}, action) => {
     switch(action.type) {
@@ -46,7 +46,9 @@ export default (state = {products: [], total: 0, hasResponse: false, message: ''
             });
             return {...state, products: newStateProducts, total: (state.total - subtractionalCost), hasResponse: false, message: ''};
         case CLEAR_ORDERS:
-                return {...state, products: [], total: 0, hasResponse: false, message: ''};
+            return {...state, products: [], total: 0, hasResponse: false, isSuccess: null, message: ''};
+        case CLEAR_MESSAGE:
+            return {...state, hasResponse: false, isSuccess: null, message: ''};
         case SEND_ORDERS:
             return {...action.payload, products: [], total: 0};
         case SEND_ORDERS_ERROR:

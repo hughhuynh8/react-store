@@ -1,4 +1,4 @@
-import { ADD_ORDER, DELETE_ORDER, CLEAR_ORDERS, SEND_ORDERS, SEND_ORDERS_ERROR } from './types';
+import { ADD_ORDER, DELETE_ORDER, CLEAR_ORDERS, CLEAR_MESSAGE, SEND_ORDERS, SEND_ORDERS_ERROR } from './types';
 
 export const addOrder = (order) => { 
     return {
@@ -21,6 +21,13 @@ export const clearOrders = () => {
     }
 };
 
+export const clearMessage = () => { 
+    return {
+        type: CLEAR_MESSAGE,
+        payload: null
+    }
+};
+
 export const sendOrders = (orders) => { 
     return async (dispatch, getState, { getFirebase }) => {
         const { userName, email } = getState().authentication; // get user details from Authentication reducer so when we create a new order, 
@@ -33,17 +40,15 @@ export const sendOrders = (orders) => {
         // send to Firebase
         try {
             const response = await firestore.collection("orders").add(newOrder);
-            console.log(response);
             dispatch({
                 type: SEND_ORDERS,
                 payload: {message: `Your order has been sent with ID: ${response.id}`, hasResponse: true, isSuccess: true}
             });
         }
         catch(err) {
-            console.log("Firebase order send error:", err);
             dispatch({
                 type: SEND_ORDERS_ERROR,
-                payload: {...err, hasResponse: true, isSuccess: false}
+                payload: {error: err.message, hasResponse: true, isSuccess: false}
             });
         }
     }
