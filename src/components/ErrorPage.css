@@ -1,0 +1,24 @@
+.error-page {
+    background: url('/images/background/space_debris.jpg') no-repeat center center fixed; 
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+
+.error-page.text {
+    margin-top: 140px;
+    text-align: center;
+}
+.error-page.text h1.ui.header {
+    font-size: 4rem;
+    text-shadow: 1px 1px 1px #000;
+}
+.error-page.text h2.ui.header {
+    font-size: 2rem;
+    text-shadow: 1px 1px 1px #000;
+    padding-bottom: 30px;
+}
+.error-page.text .inverted.primary.button {
+    background-color: #000000;
+}

@@ -5,6 +5,7 @@ import PDP from './PDP';
 const Home = lazy(() => import("./Home"));
 const About = lazy(() => import("./About"));
 const Orders = lazy(() => import("./Orders"));
+const ErrorPage = lazy(() => import("./ErrorPage"));
 
 class App extends React.Component {
     
@@ -20,6 +21,7 @@ class App extends React.Component {
                                 <Route path="/about" component={About} />
                                 <Route path="/orders" component={Orders} />
                                 <Route path="/product/:id" exact component={PDP} />
+                                <Route path="/" component={ErrorPage} />
                             </Switch>
                         </div>
                     </Suspense>
