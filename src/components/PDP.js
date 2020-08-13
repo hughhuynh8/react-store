@@ -1,10 +1,11 @@
 import React, { Component }  from 'react';
 import { connect } from 'react-redux'; 
 import { Link } from 'react-router-dom';
-import { fetchProduct } from '../actions/productActions'
+import { fetchProduct, clearProductError } from '../actions/productActions'
 import { addOrder } from '../actions/orderActions'
 import { openCart } from '../actions/cartModalActions'
 import AddToCartForm from './AddToCartForm';
+import Loading from './Loading';
 
 import './PDP.css';
 
@@ -13,7 +14,7 @@ class PDP extends Component {
         this.props.fetchProduct(this.props.match.params.id);
     }
     // When you click on another product from inside this product page, it doesn't update
-    // because componentDidMount is not called. Hence, we need to update the product when componentDidUpdate
+    // because componentDidMount is not called. Hence, we also need to update the product when componentDidUpdate
     componentDidUpdate(prevProps) {
         if (prevProps.match.params.id !== this.props.match.params.id) {
             this.props.fetchProduct(this.props.match.params.id);
@@ -25,9 +26,25 @@ class PDP extends Component {
         this.props.openCart();
     }
 
+    componentWillUnmount() {
+        this.props.clearProductError();
+    }
+
     render() {
+        // if redux product doesn't exist then either it's an error or page is still loading
         if(!this.props.product) {
-            return <div>Loading...</div>;
+            if(this.props.error){
+                return (
+                    <div>
+                        <h2>Product does not exist</h2>
+                        <p>{this.props.error.message}</p>
+                    </div>
+                );
+
+            }
+            else {
+                return <Loading />;
+            }
         }
         return (
             <div className="ui container pdp">
@@ -60,6 +77,18 @@ class PDP extends Component {
 }
 
 const mapStateToProps = (state, ownProps) => {
-    return { product: state.products.find(prod => prod.id === parseInt(ownProps.match.params.id)), order: state.order };
+    if(state.products.length > 0) {
+        // set props for product or error message
+        const product = state.products.find(prod => prod.id === parseInt(ownProps.match.params.id));    // if state.products has product with our id
+        const error = state.products.find(prod => prod.message !== undefined);      // if state.products has an error message
+        if(product !== undefined) {
+            return { product, order: state.order };
+        }
+        if(error !== undefined) {
+            return { order: state.order, error };
+        }
+    }
+    return { order: state.order };
 }
-export default connect(mapStateToProps, { fetchProduct, addOrder, openCart })(PDP);
+
+export default connect(mapStateToProps, { fetchProduct, clearProductError, addOrder, openCart })(PDP);
