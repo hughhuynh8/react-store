@@ -44,6 +44,16 @@ class Home extends React.Component {
         if(this.props.products.length === 0) {
             return <Loading />;
         }
+        // any error messages?
+        const error = this.props.products.find(prod => prod.message !== undefined);
+        if(error !== undefined){
+            return (
+                <div>
+                    <h2>Could not get any products</h2>
+                    <p>{error.message}</p>
+                </div>
+            );
+        }
 
         return (
             <div className="ui grid">{this.renderList()}</div>
