@@ -3,18 +3,19 @@ import CartModal from './CartModal';
 import MiniCartItem from './MiniCartItem';
 import { connect } from 'react-redux'; 
 import { deleteOrder, clearOrders, clearMessage, sendOrders } from '../actions/orderActions';
-import { openCart, closeCart } from '../actions/modalActions';
+import { selectModal, closeModal } from '../actions/modalActions';
+import { CART_MODAL } from './modal/types';
 
 import './MiniCart.css';
 
 class MiniCart extends React.Component {
 
     toggleModal = () => {
-        if(this.props.modal.isCartOpen) {
-            this.props.closeCart();
+        if(this.props.modal.selectedModal === CART_MODAL) {
+            this.props.closeModal();
         }
         else {
-            this.props.openCart();
+            this.props.selectModal(CART_MODAL);
         }
     }
 
@@ -23,7 +24,7 @@ class MiniCart extends React.Component {
     }
 
     cancel = () => {
-        this.props.closeCart();
+        this.props.closeModal();
         // After showing Successful checkout, we need to clear the order and message so that next time cart is opened, we can show the products
         if(this.props.order.hasResponse && this.props.order.isSuccess) {
             this.props.clearOrders();
@@ -119,4 +120,4 @@ class MiniCart extends React.Component {
 const mapStateToProps = (state) => {
     return { order: state.order, modal: state.modal };
 }
-export default connect(mapStateToProps, { deleteOrder, clearOrders, clearMessage, sendOrders, openCart, closeCart })(MiniCart);
+export default connect(mapStateToProps, { deleteOrder, clearOrders, clearMessage, sendOrders, selectModal, closeModal })(MiniCart);

@@ -1,14 +1,14 @@
-import { OPEN_CART, CLOSE_CART } from './types';
+import { SELECT_MODAL, CLOSE_MODAL } from './types';
 
-export const openCart = () => { 
+export const selectModal = (selectedModal) => { 
     return {
-        type: OPEN_CART,
-        payload: {isCartOpen: true}
+        type: SELECT_MODAL,
+        payload: {selectedModal}
     }
 };
-export const closeCart = () => { 
+export const closeModal = () => { 
     return {
-        type: CLOSE_CART,
-        payload: {isCartOpen: false}
+        type: CLOSE_MODAL,
+        payload: {selectedModal: null}
     }
 };

@@ -3,7 +3,8 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { fetchProduct, clearProductError } from '../actions/productActions'
 import { addOrder } from '../actions/orderActions'
-import { openCart } from '../actions/modalActions'
+import { selectModal } from '../actions/modalActions'
+import { CART_MODAL } from './modal/types';
 import AddToCartForm from './AddToCartForm';
 import Loading from './Loading';
 
@@ -23,7 +24,7 @@ class PDP extends Component {
 
     onAddToCartClicked = (formValues) => {
         this.props.addOrder({...this.props.product, ...formValues});
-        this.props.openCart();
+        this.props.selectModal(CART_MODAL);
     }
 
     componentWillUnmount() {
@@ -91,4 +92,4 @@ const mapStateToProps = (state, ownProps) => {
     return { order: state.order };
 }
 
-export default connect(mapStateToProps, { fetchProduct, clearProductError, addOrder, openCart })(PDP);
+export default connect(mapStateToProps, { fetchProduct, clearProductError, addOrder, selectModal })(PDP);

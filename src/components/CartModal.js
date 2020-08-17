@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 class CartModal extends React.Component {
     render() {
         let classes = '';
-        if(this.props.modal.isCartOpen) {
+        if(this.props.modal.selectedModal !== null) {
             classes = "visible active";
         }
         return ReactDOM.createPortal(

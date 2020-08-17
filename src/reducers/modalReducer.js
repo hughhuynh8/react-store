@@ -1,11 +1,11 @@
-import { OPEN_CART, CLOSE_CART } from '../actions/types';
+import { SELECT_MODAL, CLOSE_MODAL } from '../actions/types';
 
-export default (state = {isCartOpen: false}, action) => { 
+export default (state = {selectedModal: null}, action) => { 
       switch( action.type ) {
-            case OPEN_CART:
-                  return {...state, isCartOpen: action.payload.isCartOpen };
-            case CLOSE_CART:
-                  return {...state, isCartOpen: action.payload.isCartOpen };
+            case SELECT_MODAL:
+                  return {...state, selectedModal: action.payload.selectedModal };
+            case CLOSE_MODAL:
+                  return {...state, selectedModal: action.payload.selectedModal };
             default:
                   return state;
       }
