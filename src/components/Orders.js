@@ -11,8 +11,8 @@ const Orders = ({orders}) => {
   }
   return (
     <div className="ui grid">
-      <div className="ten wide column">
-        <table className="ui table cart">
+      <div className="twelve wide column">
+        <table className="ui table order">
           <thead>
               <tr>
                   <th>Order #</th>

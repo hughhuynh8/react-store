@@ -1,12 +1,33 @@
 import React from 'react';
 import Modal from './modal/Modal';
-import MiniCartItem from './MiniCartItem';
 import { connect } from 'react-redux'; 
 import { deleteOrder, clearOrders, clearMessage, sendOrders } from '../actions/orderActions';
 import { selectModal, closeModal } from '../actions/modalActions';
-import { CART_MODAL } from './modal/types';
+import { CART_MODAL } from './modal/modalTypes';
 
 import './MiniCart.css';
+
+const MiniCartItem = (props) => {
+    return (
+        <tr key={props.prod.id}>
+            <td>
+                <img src={props.prod.image} className="ui small image" alt={props.prod.name} />
+            </td>
+            <td>
+                {props.prod.name}
+            </td>
+            <td>
+                {props.prod.quantity}
+            </td>
+            <td className="right aligned price">
+                ${props.prod.price.toFixed(2)}
+            </td>
+            <td className="action right aligned">
+                <i className="times circle icon large ui red btn" onClick={props.deleteAction}></i>
+            </td>
+        </tr>
+    );
+}
 
 class MiniCart extends React.Component {
 
