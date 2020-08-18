@@ -1,0 +1,9 @@
+.ui.active.modal {
+    top: 10px;
+}
+.ui.dimmer.modals {
+    background-color: transparent;
+}
+.ui.dimmer.screen {
+    position: fixed;
+}

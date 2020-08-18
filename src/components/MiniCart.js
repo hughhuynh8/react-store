@@ -112,6 +112,7 @@ class MiniCart extends React.Component {
         return (
             <>
                 <button className="ui inverted button icon" onClick={this.toggleModal}><i className="shopping cart icon"></i></button>
+                {/* show modal when the modal name == cart modal */}
                 {this.props.modal.selectedModal === CART_MODAL &&
                     <Modal title="Shoppping Cart" content={this.renderCart()} actions={this.renderActions()} onDismiss={this.cancel} />
                 }
