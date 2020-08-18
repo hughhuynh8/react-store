@@ -1,8 +1,8 @@
 import React from 'react';
-import Modal from './modal/Modal';
+import Modal from './widgets/modal/Modal';
 import { connect } from 'react-redux'; 
 import { selectModal, closeModal } from '../actions/modalActions';
-import { ORDER_MODAL } from './modal/modalTypes';
+import { ORDER_MODAL } from './widgets/modal/modalTypes';
 
 const OrderDetailRow = (props) => {
     return (
@@ -82,7 +82,7 @@ class OrderDetails extends React.Component {
                 <button className="ui button primary" onClick={this.toggleModal}>View Details</button>
                 {/* show modal when the modal name == order modal */}
                 {this.props.modal.selectedModal === (ORDER_MODAL+this.props.order.id) &&
-                    <Modal title="Order Details" content={this.renderOrder()} actions={this.renderActions()} onDismiss={this.cancel} />
+                    <Modal title={`Order Details: ${this.props.order.id}`} content={this.renderOrder()} actions={this.renderActions()} onDismiss={this.cancel} />
                 }
             </>
         );

@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux'; 
 import { fetchProducts } from '../actions/productActions'
 import { Link } from 'react-router-dom';
-import Loading from './Loading';
+import Loading from './widgets/Loading';
 
 import './Home.css';
 

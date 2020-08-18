@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default () => {
+export default function Loading() {
     return (
         <div className="ui loading">
             <div className="ui active inverted dimmer">

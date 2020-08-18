@@ -3,7 +3,7 @@ import OrderItem from './OrderItem';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { firestoreConnect } from 'react-redux-firebase';
-import Loading from './Loading';
+import Loading from './widgets/Loading';
 
 const Orders = ({orders}) => {
   if(orders === undefined){

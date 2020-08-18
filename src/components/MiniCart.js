@@ -1,9 +1,9 @@
 import React from 'react';
-import Modal from './modal/Modal';
+import Modal from './widgets/modal/Modal';
 import { connect } from 'react-redux'; 
 import { deleteOrder, clearOrders, clearMessage, sendOrders } from '../actions/orderActions';
 import { selectModal, closeModal } from '../actions/modalActions';
-import { CART_MODAL } from './modal/modalTypes';
+import { CART_MODAL } from './widgets/modal/modalTypes';
 
 import './MiniCart.css';
 

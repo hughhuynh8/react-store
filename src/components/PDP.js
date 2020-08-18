@@ -4,9 +4,9 @@ import { Link } from 'react-router-dom';
 import { fetchProduct, clearProductError } from '../actions/productActions'
 import { addOrder } from '../actions/orderActions'
 import { selectModal } from '../actions/modalActions'
-import { CART_MODAL } from './modal/modalTypes';
+import { CART_MODAL } from './widgets/modal/modalTypes';
 import AddToCartForm from './AddToCartForm';
-import Loading from './Loading';
+import Loading from './widgets/Loading';
 
 import './PDP.css';
 
