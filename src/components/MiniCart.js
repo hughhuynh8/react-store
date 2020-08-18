@@ -1,5 +1,5 @@
 import React from 'react';
-import CartModal from './CartModal';
+import Modal from './modal/Modal';
 import MiniCartItem from './MiniCartItem';
 import { connect } from 'react-redux'; 
 import { deleteOrder, clearOrders, clearMessage, sendOrders } from '../actions/orderActions';
@@ -112,7 +112,9 @@ class MiniCart extends React.Component {
         return (
             <>
                 <button className="ui inverted button icon" onClick={this.toggleModal}><i className="shopping cart icon"></i></button>
-                <CartModal title="Shoppping Cart" content={this.renderCart()} actions={this.renderActions()} onDismiss={this.cancel} />
+                {this.props.modal.selectedModal === CART_MODAL &&
+                    <Modal title="Shoppping Cart" content={this.renderCart()} actions={this.renderActions()} onDismiss={this.cancel} />
+                }
             </>
         );
     }

@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { connect } from 'react-redux'; 
 
-class CartModal extends React.Component {
+class Modal extends React.Component {
     render() {
         let classes = '';
         if(this.props.modal.selectedModal !== null) {
@@ -25,4 +25,4 @@ class CartModal extends React.Component {
 const mapStateToProps = (state) => {
     return { modal: state.modal };
 }
-export default connect(mapStateToProps)(CartModal);
+export default connect(mapStateToProps)(Modal);
