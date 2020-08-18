@@ -29,24 +29,19 @@ class AddToCartForm extends React.Component {
 
         return (
             <div className={className}>
-                <button className="icon item" data-content="add" onClick={(e) => this.changeStuff(e)} type="button">
+                <button className="icon item" data-content="add" onClick={() => input.onChange(input.value - 1)} type="button">
                     <i className="minus icon"></i>
                 </button>
                 <label htmlFor={input.name} className="sr-only">{label}</label>
                 <input id={input.name} {...input} autoComplete="off" type="number" className="item" />
                 
                 {this.renderError(meta)}
-                <button className="icon item" data-content="subtract" type="button">
+                <button className="icon item" data-content="subtract" onClick={() => input.onChange(input.value + 1)} type="button">
                     <i className="plus icon"></i>
                 </button>
             </div>
         );
     }
-
-    changeStuff = (e) => {
-        console.log('changing stuff', e);
-        this.props.dispatch(change("addToCartForm", "quantity", 20));
-    };
 
     onSubmit = (formValues) => {
         // this.props.createStream(formValues);

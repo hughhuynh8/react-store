@@ -41,7 +41,6 @@ class PDP extends Component {
                         <p>{this.props.error.message}</p>
                     </div>
                 );
-
             }
             else {
                 return <Loading />;
