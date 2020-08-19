@@ -1,5 +1,7 @@
 import React from 'react';
-import { Field, reduxForm, change } from 'redux-form';
+import { Field, reduxForm } from 'redux-form';
+import { connect } from 'react-redux';
+
 import './AddToCartForm.css';
 
 const QUANTITY_SETTINGS = {
@@ -9,12 +11,6 @@ const QUANTITY_SETTINGS = {
 };
 
 class AddToCartForm extends React.Component {
-    
-
-    componentWillMount () {
-        this.props.initialize({ quantity: QUANTITY_SETTINGS.quantityDefaultValue });
-    }
-
     renderError ({ error, touched }) {
         if(touched && error) {
             return <div className="ui error message"><div className="header">{error}</div></div>;
@@ -88,6 +84,12 @@ const validate = (formValues) => {
     return errors;
 }
 
-
-export default reduxForm({ form: 'addToCartForm', validate })(AddToCartForm);
-
+// initial values for the form
+const mapStateToProps = (state) => {
+    return {
+        initialValues: {
+            quantity: QUANTITY_SETTINGS.quantityDefaultValue
+        }
+    }
+}
+export default connect(mapStateToProps)(reduxForm({ form: 'addToCartForm', enableReinitialize: true, validate })(AddToCartForm))
