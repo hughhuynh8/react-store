@@ -4,7 +4,6 @@ import OrderDetails from './OrderDetails';
 
 const OrderItem = ({order}) => {
     return(
-        // <p>{order.id}</p>
         <tr key={order.id}>
             <td>
                 {order.id}

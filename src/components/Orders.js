@@ -7,7 +7,7 @@ import Loading from './widgets/Loading';
 
 const Orders = ({orders}) => {
   if(orders === undefined){
-    return <Loading />;;
+    return <Loading />;
   }
   return (
     <div className="ui grid">

@@ -15,7 +15,7 @@ class Home extends React.Component {
         // return the contents of map()
         return this.props.products.map(product => {
             return (
-                <Link to={`/product/${product.id}`} className="ten wide mobile seven wide tablet four wide computer column" key={product.id}>
+                <Link to={`/product/${product.id}`} className="sixteen wide mobile seven wide tablet four wide computer column" key={product.id}>
                     <div className="ui card">
                         <div className="image">
                             <img src={product.image} alt={product.name}/>
