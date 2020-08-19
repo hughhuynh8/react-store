@@ -34,7 +34,7 @@ export const sendOrders = (orders) => {
                                                                // we can insert the userName and email for that order
         const firestore = getFirebase().firestore();
 
-        var newOrder = {...orders, userName, email, date: new Date()};
+        var newOrder = {products: orders.products, total: orders.total, userName, email, date: new Date()};
         console.log('sending order: ', newOrder);
 
         // send to Firebase
