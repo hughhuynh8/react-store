@@ -1,5 +1,6 @@
 import React from 'react';
 import Modal from './widgets/modal/Modal';
+import history from '../History';
 import { connect } from 'react-redux'; 
 import { deleteOrder, clearOrders, clearMessage, sendOrders } from '../actions/orderActions';
 import { selectModal, closeModal } from '../actions/modalActions';
@@ -41,7 +42,13 @@ class MiniCart extends React.Component {
     }
 
     checkout = () => {
-        this.props.sendOrders(this.props.order);
+        if(this.props.authentication.isSignedIn) {
+            this.props.sendOrders(this.props.order);
+        }
+        else {
+            this.props.closeModal();
+            history.push('/checkout');
+        }
     }
 
     cancel = () => {
@@ -142,6 +149,6 @@ class MiniCart extends React.Component {
     }
 }
 const mapStateToProps = (state) => {
-    return { order: state.order, modal: state.modal };
+    return { order: state.order, modal: state.modal, authentication: state.authentication };
 }
 export default connect(mapStateToProps, { deleteOrder, clearOrders, clearMessage, sendOrders, selectModal, closeModal })(MiniCart);

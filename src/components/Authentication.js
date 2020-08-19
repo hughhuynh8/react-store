@@ -5,13 +5,13 @@ import { signIn, signOut } from '../actions/authenticationActions';
 class Authentication extends Component {
 
     componentDidMount() {
-        this.props.signIn();
+        // this.props.signIn();
     }
 
     render() {
-        if(this.props.authentication.isSignedIn === null){
-            return <div>Signing in...</div>;
-        }
+        // if(this.props.authentication.isSignedIn === null){
+        //     return <div>Signing in...</div>;
+        // }
         if(this.props.authentication.isSignedIn){
             return (
                 <>
