@@ -1,6 +1,7 @@
 import React from 'react';
 import { Field, reduxForm } from 'redux-form';
 import { connect } from 'react-redux';
+import { quantityWithButtonsInput } from './widgets/forms/FormFields';
 
 import './AddToCartForm.css';
 
@@ -11,33 +12,6 @@ const QUANTITY_SETTINGS = {
 };
 
 class AddToCartForm extends React.Component {
-    renderError ({ error, touched }) {
-        if(touched && error) {
-            return <div className="ui error message"><div className="header">{error}</div></div>;
-        }
-        return null;
-    }
-
-    // Number Input with increment and decrement buttons
-    renderNumberInput = (fieldProps) => {
-        const { input, label, meta } = fieldProps;
-        const className = `ui left floated quantity menu ${meta.error && meta.touched ? 'error': ''}`;
-
-        return (
-            <div className={className}>
-                <button className="icon item" data-content="add" onClick={() => input.onChange(input.value - 1)} type="button">
-                    <i className="minus icon"></i>
-                </button>
-                <label htmlFor={input.name} className="sr-only">{label}</label>
-                <input id={input.name} {...input} autoComplete="off" type="number" className="item" />
-                
-                {this.renderError(meta)}
-                <button className="icon item" data-content="subtract" onClick={() => input.onChange(input.value + 1)} type="button">
-                    <i className="plus icon"></i>
-                </button>
-            </div>
-        );
-    }
 
     onSubmit = (formValues) => {
         // this.props.createStream(formValues);
@@ -51,7 +25,7 @@ class AddToCartForm extends React.Component {
                         
                     <Field
                         name="quantity"
-                        component={this.renderNumberInput}
+                        component={quantityWithButtonsInput}
                         label="Quantity"
                         normalize={quantityRestrictions}
                     />
