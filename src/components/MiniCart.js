@@ -42,13 +42,8 @@ class MiniCart extends React.Component {
     }
 
     checkout = () => {
-        if(this.props.authentication.isSignedIn) {
-            this.props.sendOrders(this.props.order);
-        }
-        else {
-            this.props.closeModal();
-            history.push('/checkout');
-        }
+        this.props.closeModal();
+        history.push('/checkout');
     }
 
     cancel = () => {

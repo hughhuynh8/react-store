@@ -41,6 +41,7 @@ class OrderDetails extends React.Component {
     renderOrder() {
         return (
             <div>
+                <h4 className="ui header">Order #: {this.props.order.id}</h4>
                 <table className="ui table cart">
                     <thead>
                         <tr>
@@ -82,7 +83,7 @@ class OrderDetails extends React.Component {
                 <button className="ui button primary" onClick={this.toggleModal}>View Details</button>
                 {/* show modal when the modal name == order modal */}
                 {this.props.modal.selectedModal === (ORDER_MODAL+this.props.order.id) &&
-                    <Modal title={`Order Details: ${this.props.order.id}`} content={this.renderOrder()} actions={this.renderActions()} onDismiss={this.cancel} />
+                    <Modal title="Order Details" content={this.renderOrder()} actions={this.renderActions()} onDismiss={this.cancel} />
                 }
             </>
         );

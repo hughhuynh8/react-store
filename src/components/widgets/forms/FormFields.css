@@ -1,0 +1,11 @@
+.error.message {
+    color: #9f3a38;
+}
+.ui.form fieldset {
+    padding: 0;
+    border: none;
+}
+
+.ui.form fieldset .ui.header {
+    margin-bottom: 1rem;
+}

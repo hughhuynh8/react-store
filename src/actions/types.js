@@ -4,6 +4,7 @@ export const FETCH_PRODUCT = 'FETCH_PRODUCT';
 export const FETCH_PRODUCT_ERROR = 'FETCH_PRODUCT_ERROR';
 export const CLEAR_PRODUCT_ERROR = 'CLEAR_PRODUCT_ERROR';
 export const SIGN_IN = 'SIGN_IN';
+export const SIGN_IN_GUEST = 'SIGN_IN_GUEST';
 export const SIGN_IN_ERROR = 'SIGN_IN_ERROR';
 export const SIGN_OUT = 'SIGN_OUT';
 export const SIGN_OUT_ERROR = 'SIGN_OUT_ERROR';

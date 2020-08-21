@@ -1,4 +1,4 @@
-import { SIGN_IN, SIGN_OUT, SIGN_IN_ERROR, SIGN_OUT_ERROR } from '../actions/types';
+import { SIGN_IN, SIGN_IN_GUEST, SIGN_OUT, SIGN_IN_ERROR, SIGN_OUT_ERROR } from '../actions/types';
 
 const INITIAL_STATE = {
     isSignedIn: null, 
@@ -9,9 +9,11 @@ const INITIAL_STATE = {
 export default (state = INITIAL_STATE, action) => { 
       switch( action.type ) {
             case SIGN_IN:
-                  return {...state, ...action.payload };
+                  return {...state, ...action.payload};
             case SIGN_IN_ERROR:
-                  return {...state, ...action.payload };
+                  return {...state, ...action.payload};
+            case SIGN_IN_GUEST:
+                  return {...state, ...action.payload};
             case SIGN_OUT:
                   return {...state, ...action.payload};
             case SIGN_OUT_ERROR:

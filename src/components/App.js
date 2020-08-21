@@ -3,7 +3,7 @@ import { Router, Route, Switch } from 'react-router-dom';
 import Header from './Header';
 import history from '../History';
 import PDP from './PDP';
-import GuestCheckout from "./GuestCheckout";
+import Checkout from "./Checkout";
 const Home = lazy(() => import("./Home"));
 const About = lazy(() => import("./About"));
 const Orders = lazy(() => import("./Orders"));
@@ -22,7 +22,7 @@ class App extends React.Component {
                                 <Route path="/" exact component={Home} />
                                 <Route path="/about" component={About} />
                                 <Route path="/orders" component={Orders} />
-                                <Route path="/checkout" component={GuestCheckout} />
+                                <Route path="/checkout" component={Checkout} />
                                 <Route path="/product/:id" exact component={PDP} />
                                 <Route path="/" component={ErrorPage} />
                             </Switch>

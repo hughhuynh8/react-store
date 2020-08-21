@@ -1,8 +1,9 @@
 import React from 'react';
+import './FormFields.css';
 
 function renderError({ error, touched }) {
     if(touched && error) {
-        return <div className="ui error message"><div className="header">{error}</div></div>;
+        return <div className="error message">{error}</div>;
     }
     return null;
 }

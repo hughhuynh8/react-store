@@ -1,4 +1,4 @@
-import { SIGN_IN, SIGN_OUT, SIGN_IN_ERROR, SIGN_OUT_ERROR } from './types';
+import { SIGN_IN, SIGN_IN_GUEST, SIGN_OUT, SIGN_IN_ERROR, SIGN_OUT_ERROR } from './types';
 
 
 export const signIn = () => { 
@@ -20,6 +20,14 @@ export const signIn = () => {
                 payload: {isSignedIn: false, err}
             })
         }
+    }
+}
+
+// guest user can get his username and email saved but isSignedIn=false
+export const signInGuest = (userName, email) => { 
+    return {
+        type: SIGN_IN_GUEST,
+        payload: {isSignedIn: false, userName, email}
     }
 }
 
