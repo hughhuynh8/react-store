@@ -1,4 +1,9 @@
 #globalMessage {
     top: 3.4em;
     background-color: #ff0000;
+    color: #ffffff;
+    text-align: center;
+    display: block;
+    padding-top: 10px;
+    font-weight: bold;
 }
