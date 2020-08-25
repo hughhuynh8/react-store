@@ -1,13 +1,16 @@
-.ui.card>.extra .price, .ui.cards>.card>.extra .price {
+.ui.card>.extra .price,
+.ui.cards>.card>.extra .price {
     color: #ff0000;
     font-size: 1.5em;
     font-weight: bold;
 }
+
 @media only screen and (max-width: 767px) {
     .ui.card {
         width: 100%;
     }
 }
+
 .ui.loading {
     min-height: 400px;
 }

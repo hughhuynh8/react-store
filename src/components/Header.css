@@ -3,7 +3,44 @@
 }
 .main.container {
      padding-top: 7em;
+     padding-bottom: 2em;
 }
 .my-menu.ui.menu .ui.button {
     margin-left: 0.5em;
+}
+
+.ui.menu.my-menu .toc.item {
+    display: none;
+}
+#root .pushable:not(body) {
+    -webkit-transform: none;
+    transform: none;
+}
+
+@media only screen and (max-width: 767px) {
+    #mobileNav .mobile.hidden {
+        display: none;
+    }
+    .ui.menu.my-menu .item,
+    .ui.menu.my-menu .menu {
+        display: none;
+    }
+
+    .ui.menu.my-menu .toc.item {
+        display: block;
+    }
+
+    .masthead.segment {
+        min-height: 350px;
+    }
+
+    .masthead h1.ui.header {
+        font-size: 2em;
+        margin-top: 1.5em;
+    }
+
+    .masthead h2 {
+        margin-top: 0.5em;
+        font-size: 1.5em;
+    }
 }

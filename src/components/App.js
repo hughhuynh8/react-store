@@ -8,24 +8,28 @@ const Home = lazy(() => import("./Home"));
 const About = lazy(() => import("./About"));
 const Orders = lazy(() => import("./Orders"));
 const ErrorPage = lazy(() => import("./ErrorPage"));
+const GlobalMessage = lazy(() => import("./GlobalMessage"));
 
 class App extends React.Component {
     
     render() {
         return (
-            <div>
+            <div className="pushable">
                 <Router history={history}>
                     <Suspense fallback={<div>Loading...</div>}>
                         <Header/>
-                        <div className="ui main container">
-                            <Switch>
-                                <Route path="/" exact component={Home} />
-                                <Route path="/about" component={About} />
-                                <Route path="/orders" component={Orders} />
-                                <Route path="/checkout" component={Checkout} />
-                                <Route path="/product/:id" exact component={PDP} />
-                                <Route path="/" component={ErrorPage} />
-                            </Switch>
+                        <GlobalMessage />
+                        <div className="pusher" id="pusher">
+                            <div className="ui main container">
+                                <Switch>
+                                    <Route path="/" exact component={Home} />
+                                    <Route path="/about" component={About} />
+                                    <Route path="/orders" component={Orders} />
+                                    <Route path="/checkout" component={Checkout} />
+                                    <Route path="/product/:id" exact component={PDP} />
+                                    <Route path="/" component={ErrorPage} />
+                                </Switch>
+                            </div>
                         </div>
                     </Suspense>
                 </Router>

@@ -6,33 +6,67 @@ import Authentication from './Authentication';
 import MiniCart from './MiniCart';
 
 class Header extends React.Component {
-    renderOrderLink() {
-        if(this.props.authentication.isSignedIn){
-            return (
-                <NavLink activeClassName="active" to="/orders" className="item">
-                    Orders
-                </NavLink>
-            );
+    state = {isNavOpen: false};
+
+    closeMobileNav = () => {
+        document.querySelector('#mobileNav').classList.remove('uncover', 'visible');
+        document.querySelector('#pusher').classList.remove('dimmed');
+        this.setState({isNavOpen: false});
+    }
+    openMobileNav = () => {
+        document.querySelector('#mobileNav').classList.add('uncover', 'visible');
+        document.querySelector('#pusher').classList.add('dimmed');
+        this.setState({isNavOpen: true});
+    }
+
+    toggleMobileNav = () => {
+        if(!this.state.isNavOpen) {
+            this.openMobileNav();
         }
+        else {
+            this.closeMobileNav();
+        }
+    }
+    renderMenuLinks = () => {
+        return (
+            <>
+                <NavLink exact activeClassName="active" to="/" className="header item desktop" onClick={this.closeMobileNav}>
+                    <img className="logo mobile hidden" src="/images/logo.png" alt="logo" />
+                    Homepage
+                </NavLink>
+                <NavLink activeClassName="active" to="/about" className="item desktop" onClick={this.closeMobileNav}>
+                    About
+                </NavLink>
+                {this.props.authentication.isSignedIn &&
+                    <NavLink activeClassName="active" to="/orders" className="item" onClick={this.closeMobileNav}>
+                        Orders
+                    </NavLink>
+                }
+            </>
+        );
     }
     render() {
         return (
-            <nav className="ui fixed inverted menu my-menu">
-                <div className="ui container">
-                    <NavLink exact activeClassName="active" to="/" className="header item">
-                        <img className="logo" src="/images/logo.png" alt="logo" />
-                        Homepage
-                    </NavLink>
-                    <NavLink activeClassName="active" to="/about" className="item">
-                        About
-                    </NavLink>
-                    {this.renderOrderLink()}
-                    <div className="right item">
-                        <Authentication />
-                        <MiniCart />
-                    </div>
+            <>
+                {/* Sidebar menu */}
+                <div className="ui vertical inverted sidebar menu left" id="mobileNav">
+                    {this.renderMenuLinks()}
                 </div>
-            </nav>
+                {/* Following menu */}
+                <nav className="ui fixed inverted menu my-menu">
+                    <div className="ui container">
+                        <div className="toc item" id="mobileNavButton" onClick={this.toggleMobileNav}>
+                            <i className="sidebar icon"></i>
+                        </div>
+                        
+                        {this.renderMenuLinks()}
+                        <div className="right item">
+                            <Authentication />
+                            <MiniCart />
+                        </div>
+                    </div>
+                </nav>
+            </>
         );
     }
 }
