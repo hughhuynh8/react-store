@@ -37,5 +37,15 @@
     <noscript>You need to enable JavaScript to run this app.</noscript>
     <div id="root"></div>
     <div id="modal"></div>
+
+    <script>
+      // const isProduction = ('%NODE_ENV%' === 'production');
+
+      if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.register('sw.js')
+          .then((reg) => console.log('service worker registerered', reg)) // successful, returns a registration object
+          .catch((err) => console.log('service worker not registered', err))  // unsuccessful, returns an error object
+      }
+    </script>
   </body>
 </html>
