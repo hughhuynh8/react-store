@@ -4,6 +4,7 @@ import './Header.css'
 import { connect } from 'react-redux';
 import Authentication from './Authentication';
 import MiniCart from './MiniCart';
+import logo from '../images/logo.png';
 
 class Header extends React.Component {
     state = {isNavOpen: false};
@@ -31,7 +32,7 @@ class Header extends React.Component {
         return (
             <>
                 <NavLink exact activeClassName="active" to="/" className="header item desktop" onClick={this.closeMobileNav}>
-                    <img className="logo mobile hidden" src="/images/logo.png" alt="logo" />
+                    <img className="logo mobile hidden" src={logo} alt="logo" />
                     Homepage
                 </NavLink>
                 <NavLink activeClassName="active" to="/about" className="item desktop" onClick={this.closeMobileNav}>
