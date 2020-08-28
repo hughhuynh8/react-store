@@ -1,7 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './components/App';
-import * as serviceWorker from './serviceWorker';
 import throttle from 'lodash/throttle';
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware, compose } from 'redux';
@@ -10,7 +9,7 @@ import reducers from './reducers';
 import { createFirestoreInstance } from 'redux-firestore';
 import { getFirebase, ReactReduxFirebaseProvider } from 'react-redux-firebase';
 import firebase from './config/firebaseConfig';
-
+import swDev from './swDev';
 
 import { loadState, saveState } from './localStorage';  // to save our cart into localStorage 
 
@@ -51,7 +50,5 @@ ReactDOM.render(
   document.getElementById('root')
 );
 
-// If you want your app to work offline and load faster, you can change
-// unregister() to register() below. Note this comes with some pitfalls.
-// Learn more about service workers: https://bit.ly/CRA-PWA
-serviceWorker.register();
+// register service worker
+swDev();
