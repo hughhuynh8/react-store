@@ -2,7 +2,7 @@ import React from 'react';
 import { reduxForm, Field } from 'redux-form';
 import { connect } from 'react-redux'; 
 import { signInGuest } from '../actions/authenticationActions';
-import { deleteOrder, clearOrders, clearMessage, sendOrders } from '../actions/orderActions';
+import { clearMessage, sendOrders } from '../actions/orderActions';
 import { textInput } from './widgets/forms/FormFields';
 import { required, minLength2, maxLength15, alphaNumeric, email } from './widgets/forms/FormValidation';
 

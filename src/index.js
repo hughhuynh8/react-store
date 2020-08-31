@@ -29,6 +29,7 @@ const store = createStore(
 // throttle ensures that even if lots of changes are made, at most, it saves just once a second 
 store.subscribe(throttle(() => {
   saveState({
+    authentication: store.getState().authentication,
     order: store.getState().order
   });
 }, 1000));
